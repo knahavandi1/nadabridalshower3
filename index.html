@@ -69,8 +69,9 @@
       width: 100%;
       height: 100%;
       display: block;
-      object-fit: cover;
+      object-fit: contain;
       object-position: center;
+      background: linear-gradient(180deg, #f7dfad, #e8c99a);
     }
 
     .postcard::after {
@@ -175,39 +176,42 @@
 
     #s5 .final-card {
       position: relative;
-      width: min(720px, 96vw);
-      max-height: calc(100vh - 28px);
-      overflow: hidden;
+      width: min(640px, 96vw);
+      max-height: calc(100vh - 24px);
+      overflow-y: auto;
+      scrollbar-width: thin;
       background: rgba(255, 248, 231, .97);
       border: 2px solid rgba(212, 160, 23, .65);
       border-radius: 32px;
       box-shadow: 0 24px 75px rgba(94, 47, 7, .24);
-      padding: clamp(18px, 4vw, 34px);
+      padding: clamp(14px, 2.6vw, 22px);
       text-align: center;
     }
 
     .final-art {
       width: 100%;
-      aspect-ratio: 16 / 7.2;
-      border-radius: 24px;
+      aspect-ratio: 16 / 6.2;
+      max-height: 218px;
+      border-radius: 22px;
       overflow: hidden;
-      margin-bottom: 12px;
+      margin-bottom: 6px;
+      background: #f6e3bd;
       box-shadow: 0 12px 36px rgba(74,45,0,.18);
     }
     .final-art img {
       width: 100%;
       height: 100%;
-      object-fit: cover;
-      object-position: center;
+      object-fit: contain;
+      object-position: center top;
       display: block;
     }
 
     .lineup {
       display: grid;
       grid-template-columns: repeat(4, 1fr);
-      gap: 10px;
-      margin: 12px auto 18px;
-      max-width: 520px;
+      gap: 8px;
+      margin: 8px auto 10px;
+      max-width: 480px;
     }
     .person {
       display: flex;
@@ -219,8 +223,8 @@
       font-size: .82rem;
     }
     .avatar {
-      width: clamp(68px, 12vw, 94px);
-      height: clamp(68px, 12vw, 94px);
+      width: clamp(56px, 10vw, 78px);
+      height: clamp(56px, 10vw, 78px);
       border-radius: 50%;
       border: 3px solid rgba(212,160,23,.72);
       overflow: hidden;
@@ -236,22 +240,22 @@
 
     .final-card h1 {
       font-family: 'Scheherazade New', serif;
-      font-size: clamp(2.4rem, 8vw, 4rem);
-      line-height: .95;
+      font-size: clamp(2rem, 6vw, 3.1rem);
+      line-height: .9;
       color: #9a6109;
-      margin: 4px 0 4px;
+      margin: 2px 0 0;
     }
     .final-card .welcome {
       color: var(--terracotta);
       font-family: 'Scheherazade New', serif;
-      font-size: clamp(1.25rem, 4vw, 1.7rem);
-      margin-bottom: 10px;
+      font-size: clamp(1.05rem, 3.2vw, 1.35rem);
+      margin-bottom: 6px;
     }
     .message {
       color: #5b3a10;
-      line-height: 1.72;
-      font-size: clamp(.95rem, 2.6vw, 1.06rem);
-      margin: 8px auto 12px;
+      line-height: 1.4;
+      font-size: clamp(.86rem, 2.2vw, .98rem);
+      margin: 8px auto 10px;
       max-width: 520px;
     }
 
@@ -259,9 +263,9 @@
       background: linear-gradient(135deg, #f0c040, #d4a017, #f2d37b);
       background-size: 200% auto;
       color: #462600;
-      padding: 16px 38px;
-      font-size: clamp(1rem, 3vw, 1.12rem);
-      margin-top: 4px;
+      padding: 13px 26px;
+      font-size: clamp(.95rem, 2.7vw, 1.05rem);
+      margin-top: 2px;
       animation: shimmer 2.6s linear infinite;
     }
     .gift-btn:disabled {
@@ -269,6 +273,30 @@
       color: #1f4a0a;
       animation: none;
       cursor: default;
+    }
+
+
+    .gift-panel {
+      margin: 8px auto 8px;
+      padding: 10px 12px;
+      max-width: 500px;
+      border-radius: 18px;
+      background: rgba(255, 234, 177, .55);
+      border: 1px solid rgba(212, 160, 23, .45);
+    }
+    .gift-panel .gift-label {
+      color: var(--terracotta);
+      font-weight: 900;
+      letter-spacing: .08em;
+      text-transform: uppercase;
+      font-size: .72rem;
+      margin-bottom: 4px;
+    }
+    .gift-panel .gift-copy {
+      color: #5b3a10;
+      font-size: clamp(.82rem, 2vw, .94rem);
+      line-height: 1.3;
+      margin-bottom: 8px;
     }
 
     #confetti-container { position: fixed; inset: 0; overflow: hidden; pointer-events: none; }
@@ -307,8 +335,8 @@
       .caption { margin-top: 8px; padding: 13px 15px; }
       .caption p { line-height: 1.45; }
       .lineup { grid-template-columns: repeat(4, 1fr); gap: 6px; }
-      #s5 .final-card { padding: 14px; border-radius: 24px; }
-      .final-art { border-radius: 18px; aspect-ratio: 16 / 7; }
+      #s5 .final-card { padding: 12px; border-radius: 22px; }
+      .final-art { border-radius: 16px; aspect-ratio: 16 / 5.6; max-height: 155px; }
       .person { font-size: .72rem; gap: 4px; }
       .message { line-height: 1.45; }
     }
@@ -411,12 +439,15 @@
 
       <p class="message">
         We are so excited to celebrate you and so happy to welcome you as our sister.
-        You are joining a loving, loud, funny, dramatic, camel-riding family, and we already adore you.
       </p>
 
-      <button class="gift-btn" id="giftBtn" onclick="sendGift()">Claim your gift, Nada</button>
+      <div class="gift-panel">
+        <div class="gift-label">Your bridal shower gift</div>
+        <div class="gift-copy">Tap below and the gift card link will be texted to your phone.</div>
+        <button class="gift-btn" id="giftBtn" onclick="sendGift()">Text me my gift card</button>
+      </div>
 
-      <p class="message" style="font-size:.92rem;margin-top:16px;">
+      <p class="message" style="font-size:.86rem;margin-top:8px;">
         With so much love,<br />
         <strong>Kareema and Amina</strong>
       </p>
@@ -467,7 +498,7 @@
     async function sendGift() {
       const btn = document.getElementById('giftBtn');
       btn.disabled = true;
-      btn.textContent = 'Sending...';
+      btn.textContent = 'Texting gift card...';
       try {
         const r = await fetch('/api/send-gift', {
           method: 'POST',
@@ -475,15 +506,15 @@
           body: '{}'
         });
         if (r.ok) {
-          btn.textContent = 'Gift sent. Check your phone.';
+          btn.textContent = 'Gift card texted. Check your phone.';
           burst();
         } else {
           throw new Error();
         }
       } catch {
         btn.disabled = false;
-        btn.textContent = 'Claim your gift, Nada';
-        alert('Something went wrong. Try again.');
+        btn.textContent = 'Text me my gift card';
+        alert('Something went wrong sending the text. Make sure the Vercel environment variables are set, then try again.');
       }
     }
   </script>
