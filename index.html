@@ -1,0 +1,491 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0" />
+  <title>Nada's Bridal Shower</title>
+  <link href="https://fonts.googleapis.com/css2?family=Scheherazade+New:wght@400;700&family=Nunito:wght@300;400;600;700;800&display=swap" rel="stylesheet" />
+  <style>
+    :root {
+      --cream: #fff8e7;
+      --sand: #e8c99a;
+      --sand-deep: #c9a96e;
+      --terracotta: #a7350b;
+      --terracotta-light: #c25a2a;
+      --gold: #d4a017;
+      --gold-soft: #f3d98c;
+      --ink: #45230a;
+      --blue: #78aeca;
+      --blue-deep: #40799c;
+      --shadow: rgba(74, 45, 0, 0.22);
+    }
+
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    html, body { width: 100%; height: 100%; overflow: hidden; }
+    body {
+      font-family: 'Nunito', sans-serif;
+      background:
+        radial-gradient(circle at 20% 12%, rgba(255,255,255,.55), transparent 22%),
+        linear-gradient(180deg, #f3d4a5 0%, #f6e3bd 48%, #fff8e7 100%);
+      color: var(--ink);
+    }
+
+    .scene {
+      position: absolute;
+      inset: 0;
+      display: grid;
+      grid-template-rows: auto auto auto;
+      align-content: center;
+      gap: clamp(8px, 1.6vh, 14px);
+      padding: clamp(10px, 2vh, 20px) 0;
+      opacity: 0;
+      pointer-events: none;
+      transition: opacity .65s ease;
+    }
+    .scene.active { opacity: 1; pointer-events: all; }
+    .scene.exiting { opacity: 0; }
+
+    .visual-wrap {
+      min-height: 0;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 0 clamp(10px, 2vw, 22px);
+    }
+
+    .postcard {
+      position: relative;
+      width: min(1040px, 94vw);
+      aspect-ratio: 16 / 9;
+      max-height: min(58vh, 585px);
+      border-radius: clamp(18px, 3vw, 32px);
+      overflow: hidden;
+      box-shadow: 0 22px 70px rgba(94, 47, 7, .24);
+      border: 3px solid rgba(255, 248, 231, .75);
+      background: var(--sand);
+    }
+
+    .postcard img.main-art {
+      width: 100%;
+      height: 100%;
+      display: block;
+      object-fit: cover;
+      object-position: center;
+    }
+
+    .postcard::after {
+      content: '';
+      position: absolute;
+      inset: 0;
+      pointer-events: none;
+      background: linear-gradient(180deg, rgba(255,248,231,.08), transparent 52%, rgba(69,35,10,.1));
+    }
+
+    .badge {
+      position: absolute;
+      z-index: 2;
+      left: clamp(14px, 3vw, 34px);
+      bottom: clamp(14px, 3vw, 30px);
+      width: min(420px, 50%);
+      padding: clamp(12px, 2vw, 18px) clamp(14px, 2.5vw, 24px);
+      border-radius: 22px;
+      background: rgba(255, 248, 231, .84);
+      backdrop-filter: blur(7px);
+      border: 1.5px solid rgba(212, 160, 23, .55);
+      box-shadow: 0 8px 28px rgba(74, 45, 0, .16);
+    }
+    .badge .kicker {
+      font-size: clamp(.62rem, 1.4vw, .78rem);
+      letter-spacing: .18em;
+      text-transform: uppercase;
+      font-weight: 800;
+      color: var(--terracotta);
+    }
+    .badge .title {
+      font-family: 'Scheherazade New', serif;
+      font-size: clamp(1.7rem, 4.6vw, 3.5rem);
+      line-height: .96;
+      color: #9a6109;
+      margin-top: 4px;
+    }
+    .badge .sub {
+      margin-top: 8px;
+      font-weight: 700;
+      color: #68400d;
+      font-size: clamp(.78rem, 1.7vw, 1rem);
+    }
+
+    .caption {
+      background: rgba(255, 248, 231, .96);
+      border: 2px solid var(--gold);
+      border-radius: 22px;
+      box-shadow: 0 8px 34px rgba(212, 160, 23, .22);
+      padding: clamp(14px, 2.5vw, 20px) clamp(18px, 3vw, 28px);
+      margin: 0 auto;
+      width: min(720px, calc(100vw - 28px));
+      text-align: center;
+    }
+    .caption h2 {
+      font-family: 'Scheherazade New', serif;
+      color: var(--terracotta);
+      font-size: clamp(1.35rem, 4vw, 2rem);
+      line-height: 1.18;
+      margin-bottom: 6px;
+    }
+    .caption p {
+      color: #74522d;
+      font-size: clamp(.9rem, 2.6vw, 1.05rem);
+      line-height: 1.55;
+    }
+
+    .next-btn, .gift-btn {
+      justify-self: center;
+      border: none;
+      border-radius: 999px;
+      font-family: 'Nunito', sans-serif;
+      font-weight: 800;
+      cursor: pointer;
+      box-shadow: 0 9px 28px rgba(163, 53, 11, .34);
+      transition: transform .18s ease, box-shadow .18s ease;
+    }
+    .next-btn {
+      background: linear-gradient(135deg, var(--terracotta-light), var(--terracotta));
+      color: white;
+      padding: 13px 34px;
+      margin-bottom: 0;
+      font-size: 1rem;
+    }
+    .next-btn:hover, .gift-btn:hover { transform: translateY(-2px); box-shadow: 0 13px 34px rgba(163, 53, 11, .44); }
+    .next-btn:active, .gift-btn:active { transform: translateY(0); }
+
+    .scene.focus-rayyan .postcard img.main-art { object-position: left center; }
+    .scene.focus-rayyan .badge { right: clamp(14px, 3vw, 34px); left: auto; width: min(410px, 46%); }
+    .scene.focus-sisters .badge { left: auto; right: clamp(14px, 3vw, 34px); width: min(420px, 46%); }
+    .scene.focus-nada .badge { left: clamp(14px, 3vw, 34px); width: min(430px, 46%); }
+
+    #s5 {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 18px;
+      background:
+        radial-gradient(circle at 50% 20%, rgba(255, 223, 145, .72), transparent 32%),
+        linear-gradient(180deg, #ffe7b8, var(--cream));
+    }
+
+    #s5 .final-card {
+      position: relative;
+      width: min(720px, 96vw);
+      max-height: calc(100vh - 28px);
+      overflow: hidden;
+      background: rgba(255, 248, 231, .97);
+      border: 2px solid rgba(212, 160, 23, .65);
+      border-radius: 32px;
+      box-shadow: 0 24px 75px rgba(94, 47, 7, .24);
+      padding: clamp(18px, 4vw, 34px);
+      text-align: center;
+    }
+
+    .final-art {
+      width: 100%;
+      aspect-ratio: 16 / 7.2;
+      border-radius: 24px;
+      overflow: hidden;
+      margin-bottom: 12px;
+      box-shadow: 0 12px 36px rgba(74,45,0,.18);
+    }
+    .final-art img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      object-position: center;
+      display: block;
+    }
+
+    .lineup {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 10px;
+      margin: 12px auto 18px;
+      max-width: 520px;
+    }
+    .person {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 7px;
+      color: #70420d;
+      font-weight: 800;
+      font-size: .82rem;
+    }
+    .avatar {
+      width: clamp(68px, 12vw, 94px);
+      height: clamp(68px, 12vw, 94px);
+      border-radius: 50%;
+      border: 3px solid rgba(212,160,23,.72);
+      overflow: hidden;
+      background: #f6e3bd;
+      box-shadow: 0 7px 20px rgba(74,45,0,.16);
+    }
+    .avatar img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+    }
+
+    .final-card h1 {
+      font-family: 'Scheherazade New', serif;
+      font-size: clamp(2.4rem, 8vw, 4rem);
+      line-height: .95;
+      color: #9a6109;
+      margin: 4px 0 4px;
+    }
+    .final-card .welcome {
+      color: var(--terracotta);
+      font-family: 'Scheherazade New', serif;
+      font-size: clamp(1.25rem, 4vw, 1.7rem);
+      margin-bottom: 10px;
+    }
+    .message {
+      color: #5b3a10;
+      line-height: 1.72;
+      font-size: clamp(.95rem, 2.6vw, 1.06rem);
+      margin: 8px auto 12px;
+      max-width: 520px;
+    }
+
+    .gift-btn {
+      background: linear-gradient(135deg, #f0c040, #d4a017, #f2d37b);
+      background-size: 200% auto;
+      color: #462600;
+      padding: 16px 38px;
+      font-size: clamp(1rem, 3vw, 1.12rem);
+      margin-top: 4px;
+      animation: shimmer 2.6s linear infinite;
+    }
+    .gift-btn:disabled {
+      background: linear-gradient(135deg, #9ed084, #d1f0c0);
+      color: #1f4a0a;
+      animation: none;
+      cursor: default;
+    }
+
+    #confetti-container { position: fixed; inset: 0; overflow: hidden; pointer-events: none; }
+    .confetti-piece {
+      position: fixed;
+      top: -14px;
+      border-radius: 2px;
+      animation: fall linear forwards;
+      pointer-events: none;
+    }
+    .sparkle {
+      position: fixed;
+      width: 10px;
+      height: 10px;
+      border-radius: 50%;
+      background: var(--gold);
+      opacity: 0;
+      animation: sparkle 2.5s ease-in-out infinite;
+      pointer-events: none;
+    }
+
+    @keyframes shimmer { 0% { background-position: -200% center; } 100% { background-position: 200% center; } }
+    @keyframes fall { 0% { transform: translateY(-14px) rotate(0deg); opacity: 1; } 100% { transform: translateY(105vh) rotate(720deg); opacity: 0; } }
+    @keyframes sparkle { 0%,100% { opacity: 0; transform: scale(0); } 50% { opacity: 1; transform: scale(1); } }
+
+    @media (max-width: 760px) {
+      .scene { grid-template-rows: auto auto auto; align-content: center; gap: 7px; padding: 8px 0; }
+      .visual-wrap { align-items: center; padding-top: 0; }
+      .postcard { width: 98vw; max-height: 49vh; border-radius: 18px; }
+      .badge {
+        width: min(330px, 56%);
+        padding: 10px 13px;
+        border-radius: 18px;
+      }
+      .scene.focus-rayyan .badge, .scene.focus-sisters .badge, .scene.focus-nada .badge { width: min(330px, 56%); }
+      .caption { margin-top: 8px; padding: 13px 15px; }
+      .caption p { line-height: 1.45; }
+      .lineup { grid-template-columns: repeat(4, 1fr); gap: 6px; }
+      #s5 .final-card { padding: 14px; border-radius: 24px; }
+      .final-art { border-radius: 18px; aspect-ratio: 16 / 7; }
+      .person { font-size: .72rem; gap: 4px; }
+      .message { line-height: 1.45; }
+    }
+  </style>
+</head>
+<body>
+  <div class="scene active focus-nada" id="s1">
+    <div class="visual-wrap">
+      <div class="postcard">
+        <img class="main-art" src="/assets/celebrating-nada.png" alt="Illustrated postcard of Nada, Kareema, Amina, and Rayyan celebrating in the desert" />
+        <div class="badge">
+          <div class="kicker">Bridal Shower Postcard</div>
+          <div class="title">Ready to celebrate Nada</div>
+          <div class="sub">Welcome to the family, sister.</div>
+        </div>
+      </div>
+    </div>
+    <div class="caption">
+      <h2>Somewhere in the Sahara...</h2>
+      <p>Kareema and Amina got the news that Rayyan was marrying Nada, and immediately became very ready to celebrate her.</p>
+    </div>
+    <button class="next-btn" onclick="nextScene()">Continue</button>
+  </div>
+
+  <div class="scene focus-sisters" id="s2">
+    <div class="visual-wrap">
+      <div class="postcard">
+        <img class="main-art" src="/assets/celebrating-nada.png" alt="Kareema and Amina smiling beside Nada in a Moroccan desert postcard illustration" />
+        <div class="badge">
+          <div class="kicker">Kareema and Amina</div>
+          <div class="title">Sister mode: activated</div>
+          <div class="sub">Blue dresses. Sunglasses. Full celebration energy.</div>
+        </div>
+      </div>
+    </div>
+    <div class="caption">
+      <h2>Kareema and Amina arrived in full sister mode.</h2>
+      <p>Stylish, excited, and very prepared to welcome Nada into the family with maximum love.</p>
+    </div>
+    <button class="next-btn" onclick="nextScene()">Continue</button>
+  </div>
+
+  <div class="scene focus-rayyan" id="s3">
+    <div class="visual-wrap">
+      <div class="postcard">
+        <img class="main-art" src="/assets/celebrating-nada.png" alt="Rayyan carrying gifts and welcome supplies in the desert" />
+        <div class="badge">
+          <div class="kicker">Rayyan</div>
+          <div class="title">The groom had one job</div>
+          <div class="sub">Carry the gifts. Smile through it. Keep walking.</div>
+        </div>
+      </div>
+    </div>
+    <div class="caption">
+      <h2>Meanwhile, Rayyan came prepared.</h2>
+      <p>Gifts, luggage, welcome supplies, and the very serious responsibility of bringing Nada into the family properly.</p>
+    </div>
+    <button class="next-btn" onclick="nextScene()">Continue</button>
+  </div>
+
+  <div class="scene focus-nada" id="s4">
+    <div class="visual-wrap">
+      <div class="postcard">
+        <img class="main-art" src="/assets/celebrating-nada.png" alt="Nada seated elegantly on a decorated camel in a bridal postcard illustration" />
+        <div class="badge">
+          <div class="kicker">Nada</div>
+          <div class="title">The bride at the center</div>
+          <div class="sub">Calm, glamorous, and already family.</div>
+        </div>
+      </div>
+    </div>
+    <div class="caption">
+      <h2>Nada made the whole desert look elegant.</h2>
+      <p>And just like that, the celebration was complete: one bride, two new sisters, one very proud groom, and a lot of love.</p>
+    </div>
+    <button class="next-btn" onclick="nextScene()">And finally...</button>
+  </div>
+
+  <div class="scene" id="s5">
+    <div id="confetti-container"></div>
+    <div class="sparkle" style="top:12%;left:9%;animation-delay:0s"></div>
+    <div class="sparkle" style="top:18%;right:13%;animation-delay:.7s"></div>
+    <div class="sparkle" style="top:34%;left:7%;animation-delay:1.2s"></div>
+    <div class="sparkle" style="top:30%;right:6%;animation-delay:1.7s"></div>
+
+    <div class="final-card">
+      <div class="final-art">
+        <img src="/assets/celebrating-nada.png" alt="Illustrated celebration of Nada with Kareema, Amina, and Rayyan" />
+      </div>
+
+      <h1>Nada</h1>
+      <p class="welcome">Welcome to the family, sister.</p>
+
+      <div class="lineup" aria-label="Family lineup">
+        <div class="person"><div class="avatar"><img src="/assets/avatar-nada.png" alt="Nada illustration" /></div><span>Nada</span></div>
+        <div class="person"><div class="avatar"><img src="/assets/avatar-kareema.png" alt="Kareema illustration" /></div><span>Kareema</span></div>
+        <div class="person"><div class="avatar"><img src="/assets/avatar-amina.png" alt="Amina illustration" /></div><span>Amina</span></div>
+        <div class="person"><div class="avatar"><img src="/assets/avatar-rayyan.png" alt="Rayyan illustration" /></div><span>Rayyan</span></div>
+      </div>
+
+      <p class="message">
+        We are so excited to celebrate you and so happy to welcome you as our sister.
+        You are joining a loving, loud, funny, dramatic, camel-riding family, and we already adore you.
+      </p>
+
+      <button class="gift-btn" id="giftBtn" onclick="sendGift()">Claim your gift, Nada</button>
+
+      <p class="message" style="font-size:.92rem;margin-top:16px;">
+        With so much love,<br />
+        <strong>Kareema and Amina</strong>
+      </p>
+    </div>
+  </div>
+
+  <script>
+    let cur = 1;
+    let confettiFired = false;
+
+    function nextScene() {
+      const from = document.getElementById('s' + cur);
+      cur++;
+      const to = document.getElementById('s' + cur);
+      from.classList.add('exiting');
+      from.classList.remove('active');
+      setTimeout(() => {
+        from.classList.remove('exiting');
+        to.classList.add('active');
+        if (cur === 5 && !confettiFired) {
+          confettiFired = true;
+          setTimeout(burst, 500);
+        }
+      }, 680);
+    }
+
+    function burst() {
+      const c = document.getElementById('confetti-container');
+      const pal = ['#D4A017', '#C1440E', '#E8C99A', '#1a3a7a', '#78aeca', '#FFDFA0', '#FFF8E7'];
+      for (let i = 0; i < 85; i++) {
+        setTimeout(() => {
+          const p = document.createElement('div');
+          p.className = 'confetti-piece';
+          p.style.cssText = `
+            left:${Math.random() * 100}vw;
+            background:${pal[Math.floor(Math.random() * pal.length)]};
+            width:${6 + Math.random() * 10}px;
+            height:${6 + Math.random() * 10}px;
+            border-radius:${Math.random() > .45 ? '50%' : '2px'};
+            animation-duration:${2.5 + Math.random() * 2.5}s;
+          `;
+          c.appendChild(p);
+          setTimeout(() => p.remove(), 5500);
+        }, i * 38);
+      }
+    }
+
+    async function sendGift() {
+      const btn = document.getElementById('giftBtn');
+      btn.disabled = true;
+      btn.textContent = 'Sending...';
+      try {
+        const r = await fetch('/api/send-gift', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: '{}'
+        });
+        if (r.ok) {
+          btn.textContent = 'Gift sent. Check your phone.';
+          burst();
+        } else {
+          throw new Error();
+        }
+      } catch {
+        btn.disabled = false;
+        btn.textContent = 'Claim your gift, Nada';
+        alert('Something went wrong. Try again.');
+      }
+    }
+  </script>
+</body>
+</html>
