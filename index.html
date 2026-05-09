@@ -21,7 +21,13 @@
     }
 
     * { box-sizing: border-box; margin: 0; padding: 0; }
-    html, body { width: 100%; height: 100%; overflow: hidden; }
+
+    html, body {
+      width: 100%;
+      height: 100%;
+      overflow: hidden;
+    }
+
     body {
       font-family: 'Nunito', sans-serif;
       background:
@@ -42,8 +48,15 @@
       pointer-events: none;
       transition: opacity .65s ease;
     }
-    .scene.active { opacity: 1; pointer-events: all; }
-    .scene.exiting { opacity: 0; }
+
+    .scene.active {
+      opacity: 1;
+      pointer-events: all;
+    }
+
+    .scene.exiting {
+      opacity: 0;
+    }
 
     .visual-wrap {
       min-height: 0;
@@ -95,6 +108,7 @@
       border: 1.5px solid rgba(212, 160, 23, .55);
       box-shadow: 0 8px 28px rgba(74, 45, 0, .16);
     }
+
     .badge .kicker {
       font-size: clamp(.62rem, 1.4vw, .78rem);
       letter-spacing: .18em;
@@ -102,6 +116,7 @@
       font-weight: 800;
       color: var(--terracotta);
     }
+
     .badge .title {
       font-family: 'Scheherazade New', serif;
       font-size: clamp(1.7rem, 4.6vw, 3.5rem);
@@ -109,6 +124,7 @@
       color: #9a6109;
       margin-top: 4px;
     }
+
     .badge .sub {
       margin-top: 8px;
       font-weight: 700;
@@ -126,6 +142,7 @@
       width: min(720px, calc(100vw - 28px));
       text-align: center;
     }
+
     .caption h2 {
       font-family: 'Scheherazade New', serif;
       color: var(--terracotta);
@@ -133,13 +150,15 @@
       line-height: 1.18;
       margin-bottom: 6px;
     }
+
     .caption p {
       color: #74522d;
       font-size: clamp(.9rem, 2.6vw, 1.05rem);
       line-height: 1.55;
     }
 
-    .next-btn, .gift-btn {
+    .next-btn,
+    .gift-btn {
       justify-self: center;
       border: none;
       border-radius: 999px;
@@ -148,7 +167,12 @@
       cursor: pointer;
       box-shadow: 0 9px 28px rgba(163, 53, 11, .34);
       transition: transform .18s ease, box-shadow .18s ease;
+      text-decoration: none;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
     }
+
     .next-btn {
       background: linear-gradient(135deg, var(--terracotta-light), var(--terracotta));
       color: white;
@@ -156,13 +180,38 @@
       margin-bottom: 0;
       font-size: 1rem;
     }
-    .next-btn:hover, .gift-btn:hover { transform: translateY(-2px); box-shadow: 0 13px 34px rgba(163, 53, 11, .44); }
-    .next-btn:active, .gift-btn:active { transform: translateY(0); }
 
-    .scene.focus-rayyan .postcard img.main-art { object-position: left center; }
-    .scene.focus-rayyan .badge { right: clamp(14px, 3vw, 34px); left: auto; width: min(410px, 46%); }
-    .scene.focus-sisters .badge { left: auto; right: clamp(14px, 3vw, 34px); width: min(420px, 46%); }
-    .scene.focus-nada .badge { left: clamp(14px, 3vw, 34px); width: min(430px, 46%); }
+    .next-btn:hover,
+    .gift-btn:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 13px 34px rgba(163, 53, 11, .44);
+    }
+
+    .next-btn:active,
+    .gift-btn:active {
+      transform: translateY(0);
+    }
+
+    .scene.focus-rayyan .postcard img.main-art {
+      object-position: left center;
+    }
+
+    .scene.focus-rayyan .badge {
+      right: clamp(14px, 3vw, 34px);
+      left: auto;
+      width: min(410px, 46%);
+    }
+
+    .scene.focus-sisters .badge {
+      left: auto;
+      right: clamp(14px, 3vw, 34px);
+      width: min(420px, 46%);
+    }
+
+    .scene.focus-nada .badge {
+      left: clamp(14px, 3vw, 34px);
+      width: min(430px, 46%);
+    }
 
     #s5 {
       display: flex;
@@ -198,6 +247,7 @@
       background: #f6e3bd;
       box-shadow: 0 12px 36px rgba(74,45,0,.18);
     }
+
     .final-art img {
       width: 100%;
       height: 100%;
@@ -213,6 +263,7 @@
       margin: 8px auto 10px;
       max-width: 480px;
     }
+
     .person {
       display: flex;
       flex-direction: column;
@@ -222,6 +273,7 @@
       font-weight: 800;
       font-size: .82rem;
     }
+
     .avatar {
       width: clamp(56px, 10vw, 78px);
       height: clamp(56px, 10vw, 78px);
@@ -231,6 +283,7 @@
       background: #f6e3bd;
       box-shadow: 0 7px 20px rgba(74,45,0,.16);
     }
+
     .avatar img {
       width: 100%;
       height: 100%;
@@ -245,12 +298,14 @@
       color: #9a6109;
       margin: 2px 0 0;
     }
+
     .final-card .welcome {
       color: var(--terracotta);
       font-family: 'Scheherazade New', serif;
       font-size: clamp(1.05rem, 3.2vw, 1.35rem);
       margin-bottom: 6px;
     }
+
     .message {
       color: #5b3a10;
       line-height: 1.4;
@@ -268,13 +323,6 @@
       margin-top: 2px;
       animation: shimmer 2.6s linear infinite;
     }
-    .gift-btn:disabled {
-      background: linear-gradient(135deg, #9ed084, #d1f0c0);
-      color: #1f4a0a;
-      animation: none;
-      cursor: default;
-    }
-
 
     .gift-panel {
       margin: 8px auto 8px;
@@ -284,6 +332,7 @@
       background: rgba(255, 234, 177, .55);
       border: 1px solid rgba(212, 160, 23, .45);
     }
+
     .gift-panel .gift-label {
       color: var(--terracotta);
       font-weight: 900;
@@ -292,6 +341,7 @@
       font-size: .72rem;
       margin-bottom: 4px;
     }
+
     .gift-panel .gift-copy {
       color: #5b3a10;
       font-size: clamp(.82rem, 2vw, .94rem);
@@ -299,7 +349,24 @@
       margin-bottom: 8px;
     }
 
-    #confetti-container { position: fixed; inset: 0; overflow: hidden; pointer-events: none; }
+    .gift-backup {
+      font-size: .76rem;
+      color: #7a5a2a;
+      margin-top: 8px;
+      line-height: 1.35;
+    }
+
+    .gift-backup span {
+      word-break: break-all;
+    }
+
+    #confetti-container {
+      position: fixed;
+      inset: 0;
+      overflow: hidden;
+      pointer-events: none;
+    }
+
     .confetti-piece {
       position: fixed;
       top: -14px;
@@ -307,6 +374,7 @@
       animation: fall linear forwards;
       pointer-events: none;
     }
+
     .sparkle {
       position: fixed;
       width: 10px;
@@ -318,30 +386,89 @@
       pointer-events: none;
     }
 
-    @keyframes shimmer { 0% { background-position: -200% center; } 100% { background-position: 200% center; } }
-    @keyframes fall { 0% { transform: translateY(-14px) rotate(0deg); opacity: 1; } 100% { transform: translateY(105vh) rotate(720deg); opacity: 0; } }
-    @keyframes sparkle { 0%,100% { opacity: 0; transform: scale(0); } 50% { opacity: 1; transform: scale(1); } }
+    @keyframes shimmer {
+      0% { background-position: -200% center; }
+      100% { background-position: 200% center; }
+    }
+
+    @keyframes fall {
+      0% { transform: translateY(-14px) rotate(0deg); opacity: 1; }
+      100% { transform: translateY(105vh) rotate(720deg); opacity: 0; }
+    }
+
+    @keyframes sparkle {
+      0%,100% { opacity: 0; transform: scale(0); }
+      50% { opacity: 1; transform: scale(1); }
+    }
 
     @media (max-width: 760px) {
-      .scene { grid-template-rows: auto auto auto; align-content: center; gap: 7px; padding: 8px 0; }
-      .visual-wrap { align-items: center; padding-top: 0; }
-      .postcard { width: 98vw; max-height: 49vh; border-radius: 18px; }
+      .scene {
+        grid-template-rows: auto auto auto;
+        align-content: center;
+        gap: 7px;
+        padding: 8px 0;
+      }
+
+      .visual-wrap {
+        align-items: center;
+        padding-top: 0;
+      }
+
+      .postcard {
+        width: 98vw;
+        max-height: 49vh;
+        border-radius: 18px;
+      }
+
       .badge {
         width: min(330px, 56%);
         padding: 10px 13px;
         border-radius: 18px;
       }
-      .scene.focus-rayyan .badge, .scene.focus-sisters .badge, .scene.focus-nada .badge { width: min(330px, 56%); }
-      .caption { margin-top: 8px; padding: 13px 15px; }
-      .caption p { line-height: 1.45; }
-      .lineup { grid-template-columns: repeat(4, 1fr); gap: 6px; }
-      #s5 .final-card { padding: 12px; border-radius: 22px; }
-      .final-art { border-radius: 16px; aspect-ratio: 16 / 5.6; max-height: 155px; }
-      .person { font-size: .72rem; gap: 4px; }
-      .message { line-height: 1.45; }
+
+      .scene.focus-rayyan .badge,
+      .scene.focus-sisters .badge,
+      .scene.focus-nada .badge {
+        width: min(330px, 56%);
+      }
+
+      .caption {
+        margin-top: 8px;
+        padding: 13px 15px;
+      }
+
+      .caption p {
+        line-height: 1.45;
+      }
+
+      .lineup {
+        grid-template-columns: repeat(4, 1fr);
+        gap: 6px;
+      }
+
+      #s5 .final-card {
+        padding: 12px;
+        border-radius: 22px;
+      }
+
+      .final-art {
+        border-radius: 16px;
+        aspect-ratio: 16 / 5.6;
+        max-height: 155px;
+      }
+
+      .person {
+        font-size: .72rem;
+        gap: 4px;
+      }
+
+      .message {
+        line-height: 1.45;
+      }
     }
   </style>
 </head>
+
 <body>
   <div class="scene active focus-nada" id="s1">
     <div class="visual-wrap">
@@ -354,10 +481,12 @@
         </div>
       </div>
     </div>
+
     <div class="caption">
       <h2>Somewhere in the Sahara...</h2>
       <p>Kareema and Amina got the news that Rayyan was marrying Nada, and immediately became very ready to celebrate her.</p>
     </div>
+
     <button class="next-btn" onclick="nextScene()">Continue</button>
   </div>
 
@@ -372,10 +501,12 @@
         </div>
       </div>
     </div>
+
     <div class="caption">
       <h2>Kareema and Amina arrived in full sister mode.</h2>
       <p>Stylish, excited, and very prepared to welcome Nada into the family with maximum love.</p>
     </div>
+
     <button class="next-btn" onclick="nextScene()">Continue</button>
   </div>
 
@@ -390,10 +521,12 @@
         </div>
       </div>
     </div>
+
     <div class="caption">
       <h2>Meanwhile, Rayyan came prepared.</h2>
       <p>Gifts, luggage, welcome supplies, and the very serious responsibility of bringing Nada into the family properly.</p>
     </div>
+
     <button class="next-btn" onclick="nextScene()">Continue</button>
   </div>
 
@@ -408,15 +541,18 @@
         </div>
       </div>
     </div>
+
     <div class="caption">
       <h2>Nada made the whole desert look elegant.</h2>
-      <p>And just like that, the celebration was complete: one bride, two new sisters, one very proud groom, and a lot of love.</p>
+      <p>And just like that, the celebration was complete: one bride, three new sisters — can’t forget Jini — one very proud groom, and a lot of love.</p>
     </div>
+
     <button class="next-btn" onclick="nextScene()">And finally...</button>
   </div>
 
   <div class="scene" id="s5">
     <div id="confetti-container"></div>
+
     <div class="sparkle" style="top:12%;left:9%;animation-delay:0s"></div>
     <div class="sparkle" style="top:18%;right:13%;animation-delay:.7s"></div>
     <div class="sparkle" style="top:34%;left:7%;animation-delay:1.2s"></div>
@@ -431,10 +567,33 @@
       <p class="welcome">Welcome to the family, sister.</p>
 
       <div class="lineup" aria-label="Family lineup">
-        <div class="person"><div class="avatar"><img src="/assets/avatar-nada.png" alt="Nada illustration" /></div><span>Nada</span></div>
-        <div class="person"><div class="avatar"><img src="/assets/avatar-kareema.png" alt="Kareema illustration" /></div><span>Kareema</span></div>
-        <div class="person"><div class="avatar"><img src="/assets/avatar-amina.png" alt="Amina illustration" /></div><span>Amina</span></div>
-        <div class="person"><div class="avatar"><img src="/assets/avatar-rayyan.png" alt="Rayyan illustration" /></div><span>Rayyan</span></div>
+        <div class="person">
+          <div class="avatar">
+            <img src="/assets/avatar-nada.png" alt="Nada illustration" />
+          </div>
+          <span>Nada</span>
+        </div>
+
+        <div class="person">
+          <div class="avatar">
+            <img src="/assets/avatar-kareema.png" alt="Kareema illustration" />
+          </div>
+          <span>Kareema</span>
+        </div>
+
+        <div class="person">
+          <div class="avatar">
+            <img src="/assets/avatar-amina.png" alt="Amina illustration" />
+          </div>
+          <span>Amina</span>
+        </div>
+
+        <div class="person">
+          <div class="avatar">
+            <img src="/assets/avatar-rayyan.png" alt="Rayyan illustration" />
+          </div>
+          <span>Rayyan</span>
+        </div>
       </div>
 
       <p class="message">
@@ -443,8 +602,23 @@
 
       <div class="gift-panel">
         <div class="gift-label">Your bridal shower gift</div>
-        <div class="gift-copy">Tap below and the gift card link will be texted to your phone.</div>
-        <button class="gift-btn" id="giftBtn" onclick="sendGift()">Text me my gift card</button>
+        <div class="gift-copy">Tap below to open your gift card.</div>
+
+        <a
+          class="gift-btn"
+          id="giftBtn"
+          href="https://www.vcdelivery.com/vcert/2157f63e-cd74-48ec-b0dd-6d644c4188eb"
+          target="_blank"
+          rel="noopener noreferrer"
+          onclick="burst()"
+        >
+          Open your gift card
+        </a>
+
+        <p class="gift-backup">
+          If the button does not open, copy this link:<br />
+          <span>https://www.vcdelivery.com/vcert/2157f63e-cd74-48ec-b0dd-6d644c4188eb</span>
+        </p>
       </div>
 
       <p class="message" style="font-size:.86rem;margin-top:8px;">
@@ -462,11 +636,14 @@
       const from = document.getElementById('s' + cur);
       cur++;
       const to = document.getElementById('s' + cur);
+
       from.classList.add('exiting');
       from.classList.remove('active');
+
       setTimeout(() => {
         from.classList.remove('exiting');
         to.classList.add('active');
+
         if (cur === 5 && !confettiFired) {
           confettiFired = true;
           setTimeout(burst, 500);
@@ -477,6 +654,7 @@
     function burst() {
       const c = document.getElementById('confetti-container');
       const pal = ['#D4A017', '#C1440E', '#E8C99A', '#1a3a7a', '#78aeca', '#FFDFA0', '#FFF8E7'];
+
       for (let i = 0; i < 85; i++) {
         setTimeout(() => {
           const p = document.createElement('div');
@@ -492,29 +670,6 @@
           c.appendChild(p);
           setTimeout(() => p.remove(), 5500);
         }, i * 38);
-      }
-    }
-
-    async function sendGift() {
-      const btn = document.getElementById('giftBtn');
-      btn.disabled = true;
-      btn.textContent = 'Texting gift card...';
-      try {
-        const r = await fetch('/api/send-gift', {
-          method: 'POST',
-          headers: { 'Content-Type': 'application/json' },
-          body: '{}'
-        });
-        if (r.ok) {
-          btn.textContent = 'Gift card texted. Check your phone.';
-          burst();
-        } else {
-          throw new Error();
-        }
-      } catch {
-        btn.disabled = false;
-        btn.textContent = 'Text me my gift card';
-        alert('Something went wrong sending the text. Make sure the Vercel environment variables are set, then try again.');
       }
     }
   </script>
